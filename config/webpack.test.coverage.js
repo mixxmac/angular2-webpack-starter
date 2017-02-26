@@ -4,12 +4,15 @@ var testConfig = require('./webpack.test.js');
 
 module.exports = webpackMerge(testConfig, {
     module: {
-        postLoaders: [
+        rules: [
             {
-                test: /\.ts$/,
-                include: helpers.root('src'),
-                loader: 'istanbul-instrumenter'
+                enforce: 'post',
+                test: /\.(js|ts)$/,
+                loader: 'istanbul-instrumenter-loader',
+                include: helpers.root('src')
             }
         ]
     }
 });
+
+
